@@ -5,23 +5,21 @@ services:
   tesseract:
     container_name: tesseract
     image: heartexlabs/label-studio-ml-backend:tesseract-master
-    init: true
-    build:
-      context: .
-      args:
-        TEST_ENV: ${TEST_ENV}
+    # init: true
+    # build:
+    #   context: .
+    #   args:
+    #     TEST_ENV: ${TEST_ENV}
     volumes:
       - "./data/server:/data"
     environment:
       - LOG_LEVEL=DEBUG
-
       # Specify the Label Studio URL and API key to access
       # uploaded, local storage and cloud storage files.
       # Do not use 'localhost' as it does not work within Docker containers.
       # Use prefix 'http://' or 'https://' for the URL always.
       # Determine the actual IP using 'ifconfig' (Linux/Mac) or 'ipconfig' (Windows).
       - LABEL_STUDIO_HOST=${LABEL_STUDIO_HOST}
-      - SERVICE_URL_BACKEND_9090
       # specify the access token for the label studio if you use file upload
       - LABEL_STUDIO_ACCESS_TOKEN=${LABEL_STUDIO_ACCESS_TOKEN}
       # set these variables to use Minio as a storage backend
